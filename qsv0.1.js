@@ -1,7 +1,9 @@
 // Function to render HTML content from an embed into the drop zone
 function renderHTMLFromEmbed(element) {
   // Find the embed element inside the provided element
-  var embedElement = element.querySelector('.component-html .w-embed');
+  const embedElement = element.querySelector('.component-html.w-embed');
+
+  console.log(embedElement);
 
   if (embedElement) {
     // Get the text content of the embed element
