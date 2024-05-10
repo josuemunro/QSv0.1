@@ -2,6 +2,7 @@ let currentJSON;
 
 function convertToHtml(jsonData) {
   let html = "";
+  const processedNodeIds = new Set();
 
   function getClassNames(classIds) {
       if (!classIds || classIds.length === 0) return "";
@@ -12,6 +13,11 @@ function convertToHtml(jsonData) {
   }
 
   function generateHtml(node) {
+      if (processedNodeIds.has(node._id)) {
+          return ""; // Skip if node has already been processed
+      }
+      processedNodeIds.add(node._id);
+
       let elementHtml = `<${node.tag}`;
       const classNames = getClassNames(node.classes);
       if (classNames) {
@@ -56,6 +62,8 @@ function updateDropZone(json) {
 
   // Create a temporary element to render the HTML content
   let tempElement = document.createElement('div');
+  
+  // Set the innerHTML to the output of function 'convertToHtml'
   tempElement.innerHTML = convertToHtml(json);
 
   // Append the rendered HTML content to the drop zone
