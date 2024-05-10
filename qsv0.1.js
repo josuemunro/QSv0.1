@@ -37,6 +37,7 @@ function convertToHtml(jsonData) {
               if (childNode) {
                   if (childNode.text) {
                       elementHtml += `${childNode.v}`;
+                      processedNodeIds.add(childNode._id);
                   } else {
                       elementHtml += generateHtml(childNode);
                   }
